@@ -97,10 +97,24 @@ exports.delete = async (req, res, next) => {
     }
 }
 
-exports.deleteAll = (req, res) => {
-    res.send({ message: "deleteAll handler"});
-};
+exports.deleteAll = async (req, res, next) => {
+    try {
+        const contactService = new ContactService(MongoDB.client)
+        const coutDelete = await contactService.deleteAll()
+        return res.send({message: `${coutDelete} deleted!`})
+    }
+    catch (error) {
+        return next (new ApiError(500, "An error occurred while creating the contact"))
+    }
+}
 
-exports.findAllFavorite = (req, res) => {
-    res.send({ message: "findAllFavorite handler"});
-};
+exports.findAllFavorite = async (req, res, next) => {
+    try {
+        const contactService = new ContactService(MongoDB.client)
+        const documents = await contactService.findAllFavorite(); 
+        return res.send(documents)
+    }
+    catch (error) {
+        return next (new ApiError(500, "An error occurred while creating the contact"))
+    }
+}
