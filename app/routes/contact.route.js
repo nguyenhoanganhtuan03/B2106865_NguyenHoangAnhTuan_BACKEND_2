@@ -3,11 +3,11 @@ const contacts = require("../controllers/contact.controller");
 
 const router = express.Router();
 
-router.use((req, res, next) => {
-    console.log(`[${new Date().toISOString()}] Received ${req.method} request at ${req.originalUrl}`);
-    console.log("Request Body:", req.body);
-    next();
-});
+// router.use((req, res, next) => {
+//     console.log(`[${new Date().toISOString()}] Received ${req.method} request at ${req.originalUrl}`);
+//     console.log("Request Body:", req.body);
+//     next();
+// });
 
 router.route("/")
     .get(contacts.findAll)
